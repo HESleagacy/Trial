@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediAware - Your Medication Victory Plan</title>
+    <meta name="description"
+        content="AI-powered medication coach ensuring safe timing, food interactions, and personalized guidance">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head>
+
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-icon">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M10.5 20.5 10 15 4.5 12 13 3.5c.4-.4 1.2-.4 1.6 0L21 10.5l-1.5 1.5-1.4-1.4-2.6 2.6 5.5 5.5c.4.4.4 1.2 0 1.6l-3 3c-.4.4-1.2.4-1.6 0L11.4 17l-5.5 1.5c-.5.2-1.1-.2-1.2-.7l-1-5.8" />
+                    </svg>
+                </div>
+                <span class="logo-text">MediAware</span>
+            </a>
+
+            <div class="nav-desktop">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+            </div>
+
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile"
+                aria-label="Toggle navigation">
+                <svg class="icon" id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <svg class="icon hidden" id="closeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="nav-mobile hidden" id="navMobile">
+            <a href="#features" class="nav-link-mobile">Features</a>
+            <a href="#how-it-works" class="nav-link-mobile">How It Works</a>
+            <a href="#dashboard" class="nav-link-mobile">Dashboard</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge animate-fade-in">
+                <span class="badge-text">Medication Victory Plan</span>
+            </div>
+
+            <h1 class="hero-title animate-slide-up">
+                Your meds. Your rules. <span class="gradient-text">No mistakes.</span>
+            </h1>
+
+            <p class="hero-description animate-slide-up" style="animation-delay: 100ms;">
+                Unlike generic pill trackers, MediAware uses AI to generate personalized, safe timing instructions based
+                on real drug-food interactions — and learns from your feedback.
+            </p>
+
+            <div class="hero-stats animate-slide-up" style="animation-delay: 200ms;">
+                <div class="stat-item">
+                    <div class="stat-number">AI-Powered</div>
+                    <div class="stat-label">Smart guidance & learning</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Real-time</div>
+                    <div class="stat-label">Live feedback & updates</div>
+                </div>
+            </div>
+
+            <a href="#add-medication" class="btn btn-hero btn-lg animate-slide-up" style="animation-delay: 300ms;">
+                Get Your Safe Plan Now
+            </a>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header animate-fade-in">
+                <h2 class="section-title">Why MediAware Stands Out</h2>
+                <p class="section-subtitle">More than reminders—your personal medication coach</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card animate-slide-up">
+                    <div class="feature-icon feature-icon-primary">
+                        <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">AI Safe Timing</h3>
+                    <p class="feature-description">Dynamic, data-driven instructions for when to take your medication
+                    </p>
+                </div>
+
+                <div class="feature-card animate-slide-up" style="animation-delay: 100ms;">
+                    <div class="feature-icon feature-icon-warning">
+                        <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                            </path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Food Clash Warnings</h3>
+                    <p class="feature-description">Highlights risky food-drug combinations to keep you safe</p>
+                </div>
+
+                <div class="feature-card animate-slide-up" style="animation-delay: 200ms;">
+                    <div class="feature-icon feature-icon-success">
+                        <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Safe Replacements</h3>
+                    <p class="feature-description">Get nutritious alternatives for foods you need to avoid</p>
+                </div>
+
+                <div class="feature-card animate-slide-up" style="animation-delay: 300ms;">
+                    <div class="feature-icon feature-icon-accent">
+                        <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">User Feedback Loop</h3>
+                    <p class="feature-description">Share your experience to help improve guidance for everyone</p>
+                </div>
+
+                <div class="feature-card animate-slide-up" style="animation-delay: 400ms;">
+                    <div class="feature-icon feature-icon-primary">
+                        <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Safe Delay Guidance</h3>
+                    <p class="feature-description">Know exactly how long to wait between meds and meals</p>
+                </div>
+
+                <div class="feature-card animate-slide-up" style="animation-delay: 500ms;">
+                    <div class="feature-icon feature-icon-success">
+                        <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Sentiment Analysis</h3>
+                    <p class="feature-description">AI classifies feedback to continuously improve advice</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="add-medication" class="add-med-section">
+        <div class="container">
+            <div class="section-header animate-fade-in">
+                <h2 class="section-title">Add Your Medication</h2>
+                <p class="section-subtitle">Choose a method below to add medication</p>
+            </div>
+
+            <div class="med-form-container animate-slide-up">
+                <div class="entry-tabs">
+                    <button id="tab-manual" class="tab-btn tab-active" type="button">Manual entry</button>
+                    <button id="tab-ocr" class="tab-btn" type="button">Scan / OCR</button>
+                </div>
+
+                <div id="manualPanel" class="entry-panel">
+                    <form id="medForm" class="med-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medName" class="form-label">Medication Name</label>
+                                <input type="text" id="medName" class="form-input"
+                                    placeholder="e.g., Metformin, Aspirin..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="medDose" class="form-label">Dosage</label>
+                                <input type="text" id="medDose" class="form-input" placeholder="e.g., 500mg, 10ml..."
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="medFrequency" class="form-label">Frequency</label>
+                            <select id="medFrequency" class="form-input" required>
+                                <option value="">Select frequency</option>
+                                <option value="1x/day">Once daily</option>
+                                <option value="2x/day">Twice daily</option>
+                                <option value="3x/day">Three times daily</option>
+                                <option value="4x/day">Four times daily</option>
+                                <option value="as-needed">As needed</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-hero btn-lg" style="width: 100%;">Get AI Safety Plan
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="ocrPanel" class="entry-panel hidden">
+                    <div class="ocr-section">
+                        <label class="ocr-label">Scan Prescription or Medicine Label</label>
+                        <div id="ocrDropzone" class="ocr-dropzone" role="button" tabindex="0">
+                            <span class="ocr-instructions">Drag & drop an image here or</span>
+                            <button type="button" id="ocrSelectBtn" class="btn ocr-select">Choose file</button>
+                            <input type="file" id="ocrInput" accept="image/*" class="hidden" />
+                        </div>
+
+
+
+                        <div id="ocrPreview" class="ocr-preview hidden"></div>
+
+                        <div class="ocr-fields hidden" id="ocrFields">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ocrName" class="form-label">Detected Name</label>
+                                    <input type="text" id="ocrName" class="form-input"
+                                        placeholder="Detected name (editable)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ocrDose" class="form-label">Detected Dose</label>
+                                    <input type="text" id="ocrDose" class="form-input"
+                                        placeholder="Detected dose (editable)">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ocrFrequency" class="form-label">Frequency</label>
+                                <select id="ocrFrequency" class="form-input">
+                                    <option value="">Select frequency</option>
+                                    <option value="1x/day">Once daily</option>
+                                    <option value="2x/day">Twice daily</option>
+                                    <option value="3x/day">Three times daily</option>
+                                    <option value="4x/day">Four times daily</option>
+                                    <option value="as-needed">As needed</option>
+                                </select>
+                            </div>
+
+                            <div class="ocr-actions" style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.5rem;">
+                                <button id="applyOcrBtn" type="button" class="btn">Apply & generate plan</button>
+                                <button id="fillManualBtn" type="button" class="btn">Fill manual form</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="adviceContainer" class="advice-container hidden">
+                <div class="advice-header">
+                    <h3 class="advice-title">Your Personalized Safety Plan</h3>
+                    <span class="advice-badge" id="medDisplay"></span>
+                </div>
+
+                <div class="advice-grid">
+                    <div class="advice-card advice-card-primary">
+                        <div class="advice-icon">
+                            <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <h4 class="advice-card-title">Safe Timing</h4>
+                        <p class="advice-text" id="timingAdvice">Loading...</p>
+                    </div>
+
+                    <div class="advice-card advice-card-warning">
+                        <div class="advice-icon" aria-hidden="true">
+                            <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" role="img" aria-label="warning icon">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                                </path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <h4 class="advice-card-title">
+                            <span class="emoji-fallback" role="img" aria-label="warning">⚠️</span>
+                            Food Warnings
+                        </h4>
+                        <div id="foodWarnings">Loading...</div>
+                    </div>
+
+                    <div class="advice-card advice-card-info">
+                        <div class="advice-icon">
+                            <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </div>
+                        <h4 class="advice-card-title">Safe Delays</h4>
+                        <p class="advice-text" id="delayAdvice">Loading...</p>
+                    </div>
+
+                    <div class="advice-card advice-card-success">
+                        <div class="advice-icon">
+                            <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <h4 class="advice-card-title">Safe Replacements</h4>
+                        <div id="replacements">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="feedback-section">
+                    <h4 class="feedback-title">How's this plan working for you?</h4>
+                    <form id="feedbackForm" class="feedback-form">
+                        <textarea id="feedbackText" class="form-input" rows="3" placeholder="Share your experience..."
+                            required></textarea>
+                        <button type="submit" class="btn btn-hero">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="dashboard-section">
+        <div class="container">
+            <div class="section-header animate-fade-in">
+                <h2 class="section-title">Live Feedback Dashboard</h2>
+                <p class="section-subtitle">Real-time insights from the MediAware community</p>
+            </div>
+
+            <div class="dashboard-grid" id="dashboardGrid">
+                <div class="dashboard-empty animate-fade-in">
+                    <svg class="icon-xlarge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <p>Add your first medication to see feedback statistics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-section">
+        <div class="container">
+            <div class="section-header animate-fade-in">
+                <h2 class="section-title">How MediAware Works</h2>
+                <p class="section-subtitle">Closed-loop, adaptive, life-saving</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item animate-slide-up">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Enter Details</h3>
+                        <p class="step-description">Name, dose, and frequency of your medication</p>
+                    </div>
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step-item animate-slide-up" style="animation-delay: 100ms;">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">AI Analysis</h3>
+                        <p class="step-description">Analyzes drug-food interaction database</p>
+                    </div>
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step-item animate-slide-up" style="animation-delay: 200ms;">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Get Safe Plan</h3>
+                        <p class="step-description">Personalized timing and food guidance</p>
+                    </div>
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step-item animate-slide-up" style="animation-delay: 300ms;">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Share Feedback</h3>
+                        <p class="step-description">Help improve advice for everyone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast" class="toast hidden" aria-live="polite" role="status"></div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
