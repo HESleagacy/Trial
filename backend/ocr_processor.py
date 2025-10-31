@@ -1,16 +1,19 @@
-# backend/ocr_processor.py
 import pytesseract
 from PIL import Image, ImageEnhance, ImageFilter
 import io
-from .drug_matcher import match_drug  # ← Import here
+from .drug_matcher import match_drug
 
 
 def extract_from_image(file_content: bytes, content_type: str):
     # --- Open image ---
     if content_type == "application/pdf":
-        from pdf2image import convert_from_bytes
-        images = convert_from_bytes(file_content, dpi=300)
-        image = images[0]
+        try:
+            from pdf2image import convert_from_bytes
+            images = convert_from_bytes(file_content, dpi=300)
+            image = images[0]
+        except ImportError:
+            print("Warning: pdf2image not installed. PDF processing disabled.")
+            return {"name": "", "dose": "", "raw_text": ""}
     else:  # PNG / JPEG
         image = Image.open(io.BytesIO(file_content))
 
@@ -26,10 +29,14 @@ def extract_from_image(file_content: bytes, content_type: str):
         )
 
     # --- OCR ---
-    raw_text = pytesseract.image_to_string(image, lang="eng")
+    try:
+        raw_text = pytesseract.image_to_string(image, lang="eng")
+    except Exception as e:
+        print(f"OCR Error: {e}")
+        raw_text = ""
 
     # --- Use drug_matcher (centralized, fast, no duplicate logic) ---
-    match = match_drug(raw_text, min_score=70)  # ← CALL IT HERE
+    match = match_drug(raw_text, min_score=70)
 
     return {
         "name": match["name"] if match else "",

@@ -16,10 +16,14 @@ llm = ChatGroq(
 )
 
 # Load food-drug interaction data
-with open("backend/data/drug_food_interactions.json", "r") as f:
-    INTERACTIONS = {
-        d["name"].lower(): d["food_interactions"] for d in json.load(f)
-    }
+try:
+    with open("backend/data/drug_food_interactions.json", "r") as f:
+        INTERACTIONS = {
+            d["name"].lower(): d["food_interactions"] for d in json.load(f)
+        }
+except FileNotFoundError:
+    print("Warning: drug_food_interactions.json not found. Using empty interactions.")
+    INTERACTIONS = {}
 
 def get_interactions(drug_name: str):
     """Return list of food interactions for a given drug."""
@@ -59,4 +63,3 @@ def get_ai_plan(drug: str, dose: str, frequency: str) -> str:
         "interactions": interactions_str,
     })
     return result.strip()
-

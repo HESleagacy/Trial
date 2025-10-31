@@ -104,7 +104,7 @@ def save_feedback(med_key: str, feedback_text: str, sentiment: str, source: str)
         raise
 
 def get_dashboard_stats() -> Dict:
-    """Get aggregated feedback stats for dashboard."""
+    """Get aggregated feedback stats for dashboard - matches frontend format."""
     stats = {}
     try:
         with get_db() as conn:
@@ -125,17 +125,19 @@ def get_dashboard_stats() -> Dict:
             for med_key, sentiment, source, count in rows:
                 if med_key not in stats:
                     stats[med_key] = {
-                        "very_negative": 0, 
-                        "negative": 0, 
+                        "helpful": 0,
+                        "confusing": 0,
                         "neutral": 0,
-                        "positive": 0, 
-                        "very_positive": 0,
                         "sources": {}
                     }
                 
-                # Aggregate sentiment counts
-                if sentiment in stats[med_key]:
-                    stats[med_key][sentiment] += count
+                # Map sentiment to frontend categories
+                if sentiment in ["positive", "very_positive"]:
+                    stats[med_key]["helpful"] += count
+                elif sentiment in ["negative", "very_negative"]:
+                    stats[med_key]["confusing"] += count
+                else:
+                    stats[med_key]["neutral"] += count
                 
                 # Aggregate sources
                 stats[med_key]["sources"][source] = (
@@ -158,6 +160,6 @@ def migrate_old_data():
             # Add indexes if missing
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_feedback_med ON feedback(med_key)")
             conn.commit()
-        print(" Migration complete")
+        print("Migration complete")
     except Exception as e:
-        print(f" Migration failed: {e}")
+        print(f"Migration failed: {e}")

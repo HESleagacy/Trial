@@ -304,9 +304,7 @@ document.querySelectorAll('.animate-slide-up, .animate-fade-in').forEach(el => {
 const ocrInput = document.getElementById('ocrInput');
 const ocrDropzone = document.getElementById('ocrDropzone');
 const ocrSelectBtn = document.getElementById('ocrSelectBtn');
-const scanBtn = document.getElementById('scanBtn');
 const ocrPreview = document.getElementById('ocrPreview');
-const autoApplyOCR = document.getElementById('autoApplyOCR');
 
 let selectedOCRFile = null;
 
@@ -487,40 +485,29 @@ function handleSelectedOCRFile(file) {
     const url = URL.createObjectURL(file);
     if (ocrPreview) ocrPreview.innerHTML = `<img src="${url}" alt="ocr preview"/><div class="ocr-text">${file.name}</div>`;
     if (ocrPreview) ocrPreview.classList.remove('hidden');
-    const ocrFields = document.getElementById('ocrFields');
-    if (ocrFields) ocrFields.classList.remove('hidden');
+    scanImageForOCR();
 }
 
+async function scanImageForOCR() {
+    if (!selectedOCRFile) return;
+    showToast('Scanning image...', 'info');
+    try {
+        const formData = new FormData();
+        formData.append('file', selectedOCRFile);
+        const res = await fetch(`${API_BASE_URL}/api/ocr`, { method: 'POST', body: formData });
+        if (!res.ok) throw new Error('OCR failed');
+        const result = await res.json();
+        const parsed = result.parsed || {};
 
-if (scanBtn) {
-    scanBtn.addEventListener('click', async () => {
-        if (!selectedOCRFile) {
-            showToast('Please select an image first', 'error');
-            return;
-        }
-        scanBtn.disabled = true;
-        scanBtn.textContent = 'Scanning...';
-        try {
-            const formData = new FormData();
-            formData.append('file', selectedOCRFile);
-            const res = await fetch(`${API_BASE_URL}/api/ocr`, { method: 'POST', body: formData });
-            if (!res.ok) throw new Error('OCR failed');
-            const result = await res.json();
-            const parsed = result.parsed || {};
+        if (ocrName) ocrName.value = parsed.name || '';
+        if (ocrDose) ocrDose.value = parsed.dose || '';
+        if (ocrFrequency) ocrFrequency.value = '1x/day';
 
-            if (ocrName) ocrName.value = parsed.name || '';
-            if (ocrDose) ocrDose.value = parsed.dose || '';
-            if (ocrFrequency) ocrFrequency.value = '1x/day'; // default
-
-            const ocrFields = document.getElementById('ocrFields');
-            if (ocrFields) ocrFields.classList.remove('hidden');
-            showToast('OCR succeeded — review detected fields', 'success');
-        } catch (err) {
-            console.error(err);
-            showToast('OCR error. Is backend running?', 'error');
-        } finally {
-            scanBtn.disabled = false;
-            scanBtn.textContent = 'Scan Image';
-        }
-    });
+        const ocrFields = document.getElementById('ocrFields');
+        if (ocrFields) ocrFields.classList.remove('hidden');
+        showToast('OCR succeeded — review detected fields', 'success');
+    } catch (err) {
+        console.error(err);
+        showToast('OCR error. Is backend running?', 'error');
+    }
 }
