@@ -491,6 +491,7 @@ function handleSelectedOCRFile(file) {
     if (ocrFields) ocrFields.classList.remove('hidden');
 }
 
+
 if (scanBtn) {
     scanBtn.addEventListener('click', async () => {
         if (!selectedOCRFile) {
@@ -506,31 +507,17 @@ if (scanBtn) {
             if (!res.ok) throw new Error('OCR failed');
             const result = await res.json();
             const parsed = result.parsed || {};
-            if (ocrName) ocrName.value = parsed.name || parsed.drug || '';
+
+            if (ocrName) ocrName.value = parsed.name || '';
             if (ocrDose) ocrDose.value = parsed.dose || '';
-            if (parsed.frequency && ocrFrequency) {
-                const optExists = Array.from(ocrFrequency.options).some(o => o.value === parsed.frequency);
-                if (!optExists) {
-                    const opt = document.createElement('option');
-                    opt.value = parsed.frequency;
-                    opt.textContent = parsed.frequency;
-                    ocrFrequency.appendChild(opt);
-                }
-                ocrFrequency.value = parsed.frequency;
-                showOcrCustomInput(false);
-            }
+            if (ocrFrequency) ocrFrequency.value = '1x/day'; // default
+
             const ocrFields = document.getElementById('ocrFields');
             if (ocrFields) ocrFields.classList.remove('hidden');
             showToast('OCR succeeded — review detected fields', 'success');
-            if (result.plan) {
-                const chosenFreq = (ocrFrequency && (ocrFrequency.value === 'custom' && ocrCustomInput ? ocrCustomInput.value.trim() : ocrFrequency.value)) || 'as-needed';
-                displayAdvice(ocrName ? ocrName.value : document.getElementById('medName').value, ocrDose ? ocrDose.value : document.getElementById('medDose').value, chosenFreq, result.plan);
-            } else if (autoApplyOCR && autoApplyOCR.checked) {
-                applyOcrBtn && applyOcrBtn.click();
-            }
         } catch (err) {
             console.error(err);
-            showToast('OCR error. Ensure backend /api/ocr is available.', 'error');
+            showToast('OCR error. Is backend running?', 'error');
         } finally {
             scanBtn.disabled = false;
             scanBtn.textContent = 'Scan Image';

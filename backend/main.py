@@ -16,19 +16,16 @@ app = FastAPI(
     version="4.1"
 )
 
-# Allow frontend (localhost) to connect
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000"],  # CHANGE THIS IN PROD
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-
 @app.post("/api/ocr")
 async def ocr_upload(file: UploadFile = File(...)):
-    """Upload medical bill (PNG/PDF) → Extract name + dose (NO confidence in UI)"""
     allowed = ["image/png", "image/jpeg", "application/pdf"]
     if file.content_type not in allowed:
         raise HTTPException(400, "Only PNG, JPG, PDF allowed")
@@ -37,10 +34,11 @@ async def ocr_upload(file: UploadFile = File(...)):
     result = extract_from_image(content, file.content_type)
     
     return {
-        "name": result["name"],
-        "dose": result["dose"],
-        "raw_text": result["raw_text"]  # Optional: for debugging
-        # "confidence" is NOT returned to frontend
+        "parsed": {
+            "name": result["name"],
+            "dose": result["dose"]
+        }
+        # NO raw_text → PII safe
     }
 
 
